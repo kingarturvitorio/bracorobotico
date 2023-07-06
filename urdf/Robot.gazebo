@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<robot name="Robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+
+ <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+      <parameters>/home/artur/bracorobotico/src/bracorobotico/config/jtc.yaml</parameters>
+    </plugin>
+  </gazebo>
+  
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+  </hardware>
+
+  <joint name="Revolucionar1">
+    <command_interface name="position">
+      <param name="min">-3.14</param>
+      <param name="max">3.14</param>
+    </command_interface>
+    <state_interface name="position"/>
+    <param name="initial_position">0.0</param>   
+  </joint>
+  <joint name="Revolucionar2">
+    <command_interface name="position">
+      <param name="min">-3.14</param>
+      <param name="max">3.14</param>
+    </command_interface>
+    <state_interface name="position"/>
+    <param name="initial_position">-1.57</param>   
+  </joint>
+  <joint name="Revolucionar3">
+    <command_interface name="position">
+      <param name="min">-3.14</param>
+      <param name="max">3.14</param>
+    </command_interface>
+    <state_interface name="position"/>
+    <param name="initial_position">0.0</param>   
+  </joint>
+</ros2_control>
+
+</robot>

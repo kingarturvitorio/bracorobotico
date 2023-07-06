@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<robot name="Robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find bracorobotico)/urdf/materials.xacro" />
+<xacro:include filename="$(find bracorobotico)/urdf/Robot.trans" />
+<xacro:include filename="$(find bracorobotico)/urdf/Robot.gazebo" />
+
+<link name= "world"/>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="2.4437591469766973e-13 -0.0023935207808241025 0.002072474625176658" rpy="0 0 0"/>
+    <mass value="0.25512324146388743"/>
+    <inertia ixx="9.7e-05" iyy="9.7e-05" izz="0.000192" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://bracorobotico/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://bracorobotico/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="base_1">
+  <inertial>
+    <origin xyz="-0.013574674116284137 -0.0032203531974283354 0.040188161808609756" rpy="0 0 0"/>
+    <mass value="1.1206140871556318"/>
+    <inertia ixx="0.001002" iyy="0.001242" izz="0.000901" ixy="2.6e-05" iyz="1e-06" ixz="0.000342"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.002394 0.0015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://bracorobotico/meshes/base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.002394 0.0015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://bracorobotico/meshes/base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="elo1_1">
+  <inertial>
+    <origin xyz="0.012267169795555281 0.030859759313971585 0.055839168523822244" rpy="0 0 0"/>
+    <mass value="0.6855797516111669"/>
+    <inertia ixx="0.001955" iyy="0.001946" izz="0.000114" ixy="-0.0" iyz="-4e-06" ixz="-0.000109"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0102 0.033363 -0.10797" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://bracorobotico/meshes/elo1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0.0102 0.033363 -0.10797" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://bracorobotico/meshes/elo1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="elo2_1">
+  <inertial>
+    <origin xyz="-0.0030293603719406363 0.030333139890871524 0.03778439091393071" rpy="0 0 0"/>
+    <mass value="0.34482683449061696"/>
+    <inertia ixx="0.00106" iyy="0.001086" izz="7.9e-05" ixy="-0.0" iyz="0.0" ixz="-0.000114"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0159 0.033363 -0.25097" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://bracorobotico/meshes/elo2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0.0159 0.033363 -0.25097" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://bracorobotico/meshes/elo2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+
+<joint name="base_joint" type="fixed">
+  <origin xyz = "0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+  <parent link ="world"/>
+  <child link="base_link"/>
+
+  </joint>
+
+<joint name="Revolucionar1" type="revolute">
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="base_1"/>
+  <axis xyz="-0.0 -0.0 -1.0"/>
+  <limit lower="-1.73" upper="1.73" effort="10" velocity="0.5"/>
+
+</joint>
+
+<joint name="Revolucionar2" type="revolute">
+  <origin xyz="-0.0102 -0.030969 0.10947" rpy="0 0 0"/>
+  <parent link="base_1"/>
+  <child link="elo1_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+  <limit lower="-1.73" upper="1.73" effort="10" velocity="0.5"/>
+
+</joint>
+
+<joint name="Revolucionar3" type="revolute">
+  <origin xyz="-0.0057 0.0 0.143" rpy="0 0 0"/>
+  <parent link="elo1_1"/>
+  <child link="elo2_1"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+  <limit lower="-1.73" upper="1.73" effort="10" velocity="0.5"/>
+
+</joint>
+
+</robot>
